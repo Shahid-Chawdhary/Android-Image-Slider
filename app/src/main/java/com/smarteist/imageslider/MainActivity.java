@@ -11,6 +11,7 @@ import com.smarteist.autoimageslider.IndicatorView.PageIndicatorView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.IndicatorView.draw.controller.DrawController;
 import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderPager;
 import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.imageslider.Model.SliderItem;
 
@@ -40,6 +41,30 @@ public class MainActivity extends AppCompatActivity {
         sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
+
+        sliderView.mSliderPager.addOnPageChangeListener(new SliderPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == 2){
+                    if (sliderView.mIsManualMove){
+                        Log.e("@#OnPageScroll= ","Manual Move");
+                        sliderView.mIsManualMove = false;
+                    }else{
+                        Log.e("@#OnPageScroll= ","Auto Move");
+                        sliderView.mIsManualMove = false;
+                    }
+                }
+            }
+        });
+
 
 
         sliderView.setOnIndicatorClickListener(new DrawController.ClickListener() {

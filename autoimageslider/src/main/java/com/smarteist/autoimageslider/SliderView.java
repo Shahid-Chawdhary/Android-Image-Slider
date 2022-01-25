@@ -67,12 +67,13 @@ public class SliderView extends FrameLayout
     private int mScrollTimeInMillis;
     private PageIndicatorView mPagerIndicator;
     private SliderViewAdapter mPagerAdapter;
-    private SliderPager mSliderPager;
+    public SliderPager mSliderPager;
     private InfinitePagerAdapter mInfinitePagerAdapter;
     private OnSliderPageListener mPageListener;
     private boolean mIsInfiniteAdapter = true;
     private boolean mIsIndicatorEnabled = true;
     private int mPreviousPosition = -1;
+    public boolean mIsManualMove = false;
 
     /*Constructor*/
     public SliderView(Context context) {
@@ -384,6 +385,7 @@ public class SliderView extends FrameLayout
             if (event.getAction() == MotionEvent.ACTION_MOVE) {
                 stopAutoCycle();
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                this.mIsManualMove = true;
                 // resume after ~2 seconds debounce.
                 mHandler.postDelayed(new Runnable() {
                     @Override
